@@ -22,18 +22,9 @@ public class Problem1(InputDownloader inputDownloader) : ProblemBase(1, inputDow
         return PartTwo(Input);
     }
 
-    public static int PartOne(IEnumerable<string> input)
+    public static object PartOne(IEnumerable<string> input)
     {
-        var leftList = new List<int>();
-        var rightList = new List<int>();
-
-        foreach (var line in input)
-        {
-            var split = line.Split(' ', StringSplitOptions.RemoveEmptyEntries);
-
-            leftList.Add(split[0].ToInt());
-            rightList.Add(split[1].ToInt());
-        }
+        var (leftList, rightList) = ParseLists(input);
 
         leftList.Sort();
         rightList.Sort();
@@ -48,7 +39,21 @@ public class Problem1(InputDownloader inputDownloader) : ProblemBase(1, inputDow
         return sumOfDifferences;
     }
 
-    public static long PartTwo(IEnumerable<string> input)
+    public static object PartTwo(IEnumerable<string> input)
+    {
+        var (leftList, rightList) = ParseLists(input);
+
+        var sumOfSimilarityScores = 0;
+
+        foreach (var leftNumber in leftList)
+        {
+            sumOfSimilarityScores += leftNumber * rightList.Count(n => n == leftNumber);
+        }
+
+        return sumOfSimilarityScores;
+    }
+
+    private static (List<int> Left, List<int> Right) ParseLists(IEnumerable<string> input)
     {
         var leftList = new List<int>();
         var rightList = new List<int>();
@@ -61,15 +66,6 @@ public class Problem1(InputDownloader inputDownloader) : ProblemBase(1, inputDow
             rightList.Add(split[1].ToInt());
         }
 
-        var sumOfSimilarityScores = 0;
-
-        foreach (var leftNumber in leftList)
-        {
-            var rightListCount = rightList.Count(n => n == leftNumber);
-
-            sumOfSimilarityScores += rightListCount * leftNumber;
-        }
-
-        return sumOfSimilarityScores;
+        return (leftList, rightList);
     }
 }

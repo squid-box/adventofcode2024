@@ -25,7 +25,6 @@ public class Problem1Tests
     [Test]
     public void TestPartTwo()
     {
-
         Assert.That(Problem1.PartTwo(TestInput), Is.EqualTo(31));
     }
 }
