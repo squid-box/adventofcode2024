@@ -10,6 +10,7 @@ using System.IO;
 public abstract class ProblemBase
 {
     private readonly InputDownloader _inputDownloader;
+    private readonly string _inputFilePath;
 
     /// <summary>
     /// Creates a new <see cref="ProblemBase"/>.
@@ -22,6 +23,8 @@ public abstract class ProblemBase
 
         Day = day;
         Result = new Result(Day);
+
+        _inputFilePath = $"..{Path.DirectorySeparatorChar}..{Path.DirectorySeparatorChar}Inputs{Path.DirectorySeparatorChar}{Day}.input";
     }
 
     /// <summary>
@@ -32,7 +35,7 @@ public abstract class ProblemBase
     /// <summary>
     /// Gets the input for this problem.
     /// </summary>
-    public ICollection<string> Input => File.ReadAllLines($"..{Path.DirectorySeparatorChar}..{Path.DirectorySeparatorChar}Inputs{Path.DirectorySeparatorChar}{Day}.input");
+    public ICollection<string> Input => File.Exists(_inputFilePath) ? File.ReadAllLines(_inputFilePath) : [];
 
     /// <summary>
     /// The <see cref="Result"/> of solving this problem.
