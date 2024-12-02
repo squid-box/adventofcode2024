@@ -22,37 +22,40 @@ public class Problem2(InputDownloader inputDownloader) : ProblemBase(2, inputDow
         return PartTwo(Input);
     }
 
-    public static object PartOne(IEnumerable<string> input)
+    private static bool IsLineSafe(IList<int> numbers)
     {
-        var numberOfSafeLines = 0;
+        var isIncreasing = numbers[1] - numbers[0] > 0;
 
-        foreach (var line in input)
+        for (var i = 0; i < numbers.Count - 1; i++)
         {
-            var isSafe = true;
+            var diff = numbers[i + 1] - numbers[i];
 
-            var numbers = line.Split(' ').AsInt();
-
-            var isIncreasing = numbers[0] - numbers[1] > 0;
-
-            for (var i = 0; i < numbers.Count - 1; i++)
+            if (!Math.Abs(diff).IsWithin(1, 3) ||
+                isIncreasing && diff < 0 ||
+                !isIncreasing && diff > 0)
             {
-                var diff = numbers[i] - numbers[i + 1];
-
-                if (isIncreasing && diff <= 0 ||
-                    !isIncreasing && diff >= 0 ||
-                    Math.Abs(diff) > 3)
-                {
-                    isSafe = false;
-                }
-            }
-
-            if (isSafe)
-            {
-                numberOfSafeLines++;
+                return false;
             }
         }
 
-        return numberOfSafeLines;
+        return true;
+    }
+
+    public static object PartOne(IEnumerable<string> input)
+    {
+        var safeLines = 0;
+
+        foreach (var line in input)
+        {
+            var numbers = line.Split(' ').AsInt();
+            
+            if (IsLineSafe(numbers))
+            {
+                safeLines++;
+            }
+        }
+
+        return safeLines;
     }
 
     public static object PartTwo(IEnumerable<string> input)
@@ -61,38 +64,26 @@ public class Problem2(InputDownloader inputDownloader) : ProblemBase(2, inputDow
 
         foreach (var line in input)
         {
-            var isSafe = true;
-            var numberOfErrors = 0;
-
             var numbers = line.Split(' ').AsInt();
 
-            var isIncreasing = numbers[0] - numbers[1] > 0;
-
-            for (var i = 0; i < numbers.Count - 1; i++)
-            {
-                var diff = numbers[i] - numbers[i + 1];
-
-                if (Math.Abs(diff) > 3)
-                {
-                    if (numberOfErrors == 0)
-                    {
-                        numberOfErrors++;
-                        continue;
-                    }
-
-                    isSafe = false;
-                }
-                else if (isIncreasing && diff <= 0 ||
-                    !isIncreasing && diff >= 0)
-                {
-                    isSafe = false;
-                }
-                
-            }
-
-            if (isSafe)
+            // Base check.
+            if (IsLineSafe(numbers))
             {
                 numberOfSafeLines++;
+                continue;
+            }
+
+            // Problem Dampener check.
+            for (var i = 0; i < numbers.Count; i++)
+            {
+                var numberCopy = numbers.ToList();
+                numberCopy.RemoveAt(i);
+
+                if (IsLineSafe(numberCopy))
+                {
+                    numberOfSafeLines++;
+                    break;
+                }
             }
         }
 

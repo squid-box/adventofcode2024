@@ -26,6 +26,6 @@ public class Problem2Tests
     [Test]
     public void TestPartTwo()
     {
-        Assert.That(Problem2.PartTwo(TestInput), Is.EqualTo(4));
+        Assert.That(Problem2.PartTwo(TestInput), Is.EqualTo(5));
     }
 }
