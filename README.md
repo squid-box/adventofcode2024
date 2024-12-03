@@ -10,7 +10,7 @@ The .exe will download the input of the requested day if it's missing.
 |:------------------------------------------:|:------------------:|:-------------:|
 |  [1](https://adventofcode.com/2024/day/1)  | Historian Hysteria | :star: :star: |
 |  [2](https://adventofcode.com/2024/day/2)  | Red-Nosed Reports  | :star: :star: |
-|  [3](https://adventofcode.com/2024/day/3)  |                    |               |
+|  [3](https://adventofcode.com/2024/day/3)  | Mull It Over       | :star: :star: |
 |  [4](https://adventofcode.com/2024/day/4)  |                    |               |
 |  [5](https://adventofcode.com/2024/day/5)  |                    |               |
 |  [6](https://adventofcode.com/2024/day/6)  |                    |               |
