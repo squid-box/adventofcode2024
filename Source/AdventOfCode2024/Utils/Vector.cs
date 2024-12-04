@@ -134,4 +134,16 @@ public class Vector
     /// Gets a vector representing moving one step "hyper south".
     /// </summary>
     public static Vector HyperSouth => new(0, 0, 0, -1);
+
+    /// <summary>
+    /// Gets the vectors for the two-dimensional directions.
+    /// </summary>
+    public static Vector[] AllTwoDimensionalVectors =
+    [
+        West, North, East, South,
+        North + West,
+        North + East,
+        South + West,
+        South + East
+    ];
 }
