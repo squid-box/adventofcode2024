@@ -92,6 +92,65 @@ public class Problem4(InputDownloader inputDownloader) : ProblemBase(4, inputDow
 
     public static object PartTwo(IEnumerable<string> input)
     {
-        return "Unsolved";
+        var list = input.ToList();
+
+        var width = list.First().Length;
+        var height = list.Count;
+
+        var wordSearch = new Matrix<char>(width, height);
+
+        for (var y = 0; y < height; y++)
+        {
+            for (var x = 0; x < width; x++)
+            {
+                wordSearch[new Coordinate(x, y)] = list[y][x];
+            }
+        }
+
+        var foundMas = 0;
+
+        for (var y = 1; y < height - 1; y++)
+        {
+            for (var x = 1; x < width - 1; x++)
+            {
+                var coordinate = new Coordinate(x, y);
+
+                if (!wordSearch[coordinate].Equals('A'))
+                {
+                    continue;
+                }
+
+                if (wordSearch[coordinate + Vector.North + Vector.West].Equals('M') &&
+                    wordSearch[coordinate + Vector.North + Vector.East].Equals('M') &&
+                    wordSearch[coordinate + Vector.South + Vector.East].Equals('S') &&
+                    wordSearch[coordinate + Vector.South + Vector.West].Equals('S'))
+                {
+                    foundMas++;
+                }
+                else if (wordSearch[coordinate + Vector.North + Vector.West].Equals('S') &&
+                         wordSearch[coordinate + Vector.North + Vector.East].Equals('M') &&
+                         wordSearch[coordinate + Vector.South + Vector.East].Equals('M') &&
+                         wordSearch[coordinate + Vector.South + Vector.West].Equals('S'))
+                {
+                    foundMas++;
+                }
+                else if (wordSearch[coordinate + Vector.North + Vector.West].Equals('S') &&
+                         wordSearch[coordinate + Vector.North + Vector.East].Equals('S') &&
+                         wordSearch[coordinate + Vector.South + Vector.East].Equals('M') &&
+                         wordSearch[coordinate + Vector.South + Vector.West].Equals('M'))
+                {
+                    foundMas++;
+                }
+                else if (wordSearch[coordinate + Vector.North + Vector.West].Equals('M') &&
+                         wordSearch[coordinate + Vector.North + Vector.East].Equals('S') &&
+                         wordSearch[coordinate + Vector.South + Vector.East].Equals('S') &&
+                         wordSearch[coordinate + Vector.South + Vector.West].Equals('M'))
+                {
+                    foundMas++;
+                }
+            }
+        }
+
+        return foundMas;
     }
 }

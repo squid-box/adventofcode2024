@@ -1,6 +1,5 @@
 namespace AdventOfCode2024.Tests.Problems;
 
-using System.Linq;
 using AdventOfCode2024.Problems;
 using NUnit.Framework;
 
