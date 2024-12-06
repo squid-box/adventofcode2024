@@ -13,7 +13,7 @@ The .exe will download the input of the requested day if it's missing.
 |  [3](https://adventofcode.com/2024/day/3)  | Mull It Over       | :star: :star: |
 |  [4](https://adventofcode.com/2024/day/4)  | Ceres Search       | :star: :star: |
 |  [5](https://adventofcode.com/2024/day/5)  | Print Queue        | :star: :star: |
-|  [6](https://adventofcode.com/2024/day/6)  |                    |               |
+|  [6](https://adventofcode.com/2024/day/6)  | Guard Gallivant    | :star: :star: |
 |  [7](https://adventofcode.com/2024/day/7)  |                    |               |
 |  [8](https://adventofcode.com/2024/day/8)  |                    |               |
 |  [9](https://adventofcode.com/2024/day/9)  |                    |               |

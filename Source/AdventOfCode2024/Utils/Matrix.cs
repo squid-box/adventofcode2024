@@ -68,6 +68,12 @@ public class Matrix<T>
         set => SetElement(key, value);
     }
 
+    public T this[int x, int y]
+    {
+        get => GetElement(x, y);
+        set => SetElement(x, y, value);
+    }
+
     public static Matrix<T> operator +(Matrix<T> a, Matrix<T> b)
     {
         var result = new Matrix<T>(a.Width, a.Height);
@@ -82,6 +88,21 @@ public class Matrix<T>
         }
 
         return result;
+    }
+
+    public Matrix<T> Copy()
+    {
+        var newMatrix = new Matrix<T>(Width, Height);
+
+        for (var y = 0; y < Height; y++)
+        {
+            for (var x = 0; x < Width; x++)
+            {
+                newMatrix[x, y] = GetElement(x, y);
+            }
+        }
+
+        return newMatrix;
     }
 
     private static T Sum(T a, T b)
@@ -291,6 +312,18 @@ public class Matrix<T>
         {
             SetElement(x, y, values[y]);
         }
+    }
+
+    public bool IsWithinBounds(int x, int y)
+    {
+        return x.IsWithin(0, Width) &&
+               y.IsWithin(0, Height);
+    }
+
+    public bool IsWithinBounds(Coordinate coordinate)
+    {
+        return coordinate.X.IsWithin(0, Width) &&
+               coordinate.Y.IsWithin(0, Height);
     }
 
     private void EvaluateGivenIndices(int x, int y)
