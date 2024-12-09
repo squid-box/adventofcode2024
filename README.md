@@ -16,7 +16,7 @@ The .exe will download the input of the requested day if it's missing.
 |  [6](https://adventofcode.com/2024/day/6)  | Guard Gallivant       | :star: :star: |
 |  [7](https://adventofcode.com/2024/day/7)  | Bridge Repair         | :star: :star: |
 |  [8](https://adventofcode.com/2024/day/8)  | Resonant Collinearity | :star: :star: |
-|  [9](https://adventofcode.com/2024/day/9)  |                       |               |
+|  [9](https://adventofcode.com/2024/day/9)  | Disk Fragmenter       | :star: :star: |
 | [10](https://adventofcode.com/2024/day/10) |                       |               |
 | [11](https://adventofcode.com/2024/day/11) |                       |               |
 | [12](https://adventofcode.com/2024/day/12) |                       |               |
