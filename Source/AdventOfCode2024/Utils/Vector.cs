@@ -2,35 +2,34 @@
 
 using System;
 
-public class Vector
+/// <summary>
+/// Represents a vector in 2-4 dimensional space.
+/// </summary>
+/// <param name="x">The X component.</param>
+/// <param name="y">The Y component.</param>
+/// <param name="z">The Z component.</param>
+/// <param name="w">The W component.</param>
+public class Vector(int x, int y, int z = 0, int w = 0)
 {
     /// <summary>
     /// Gets the X component of this <see cref="Vector"/>.
     /// </summary>
-    public int X { get; }
+    public int X { get; } = x;
 
     /// <summary>
     /// Gets the Y component of this <see cref="Vector"/>.
     /// </summary>
-    public int Y { get; }
+    public int Y { get; } = y;
 
     /// <summary>
     /// Gets the Z component of this <see cref="Vector"/>.
     /// </summary>
-    public int Z { get; }
+    public int Z { get; } = z;
 
     /// <summary>
     /// Gets the W component of this <see cref="Vector"/>.
     /// </summary>
-    public int W { get; }
-
-    public Vector(int x, int y, int z = 0, int w = 0)
-    {
-        X = x;
-        Y = y;
-        Z = z;
-        W = w;
-    }
+    public int W { get; } = w;
 
     /// <summary>
     /// Returns the magnitude of this Vector.
@@ -134,6 +133,17 @@ public class Vector
     /// Gets a vector representing moving one step "hyper south".
     /// </summary>
     public static Vector HyperSouth => new(0, 0, 0, -1);
+
+    /// <summary>
+    /// Gets the vectors for the cardinal directions.
+    /// </summary>
+    public static Vector[] CardinalVectors =
+    [
+        West, 
+        North, 
+        East, 
+        South
+    ];
 
     /// <summary>
     /// Gets the vectors for the two-dimensional directions.

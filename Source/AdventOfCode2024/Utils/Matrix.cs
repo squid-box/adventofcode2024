@@ -3,7 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using System.Text;
 using AdventOfCode2024.Utils.Extensions;
 
 /// <summary>
@@ -314,12 +314,23 @@ public class Matrix<T>
         }
     }
 
+    /// <summary>
+    /// Determines if given coordinate is within the matrix bounds.
+    /// </summary>
+    /// <param name="x">X coordinate.</param>
+    /// <param name="y">Y coordinate.</param>
+    /// <returns>True if within bounds, otherwise false.</returns>
     public bool IsWithinBounds(int x, int y)
     {
         return x.IsWithin(0, Width) &&
                y.IsWithin(0, Height);
     }
 
+    /// <summary>
+    /// Determines if given coordinate is within the matrix bounds.
+    /// </summary>
+    /// <param name="coordinate">The coordinate.</param>
+    /// <returns>True if within bounds, otherwise false.</returns>
     public bool IsWithinBounds(Coordinate coordinate)
     {
         return coordinate.X.IsWithin(0, Width) &&
@@ -336,5 +347,24 @@ public class Matrix<T>
         {
             throw new IndexOutOfRangeException($"Given index (y = {y}) not within matrix bounds.");
         }
+    }
+
+    /// <inheritdoc />
+    public override string ToString()
+    {
+        var sb = new StringBuilder();
+
+        for (var y = 0; y < Height; y++)
+        {
+            for (var x = 0; x < Width; x++)
+            {
+                sb.Append(GetElement(x, y));
+                sb.Append(",");
+            }
+
+            sb.AppendLine();
+        }
+
+        return sb.ToString();
     }
 }
