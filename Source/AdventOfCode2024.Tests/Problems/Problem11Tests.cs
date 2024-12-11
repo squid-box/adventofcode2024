@@ -8,18 +8,12 @@ public class Problem11Tests
 {
     private static readonly string[] TestInput =
     [
-        
+        "125 17"
     ];
 
     [Test]
     public void TestPartOne()
     {
-        Assert.That(Problem11.PartOne(TestInput), Is.EqualTo(4711));
-    }
-
-    [Test]
-    public void TestPartTwo()
-    {
-        Assert.That(Problem11.PartTwo(TestInput), Is.EqualTo(4711));
+        Assert.That(Problem11.PartOne(TestInput), Is.EqualTo(55312));
     }
 }
