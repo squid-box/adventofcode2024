@@ -8,7 +8,7 @@ using System.Collections.Generic;
 /// </summary>
 public class Coordinate : IComparable
 {
-    public Coordinate(int x, int y, int z = 0, int w = 0)
+    public Coordinate(long x, long y, long z = 0, long w = 0)
     {
         X = x;
         Y = y;
@@ -16,13 +16,13 @@ public class Coordinate : IComparable
         W = w;
     }
 
-    public int X { get; }
+    public long X { get; }
 
-    public int Y { get; }
+    public long Y { get; }
 
-    public int Z { get; }
+    public long Z { get; }
 
-    public int W { get; }
+    public long W { get; }
 
     public IList<Coordinate> GetNeighbors(bool includeDiagonals = true)
     {
@@ -91,7 +91,7 @@ public class Coordinate : IComparable
         return -1;
     }
 
-    public static int ManhattanDistance(Coordinate origin, Coordinate destination)
+    public static long ManhattanDistance(Coordinate origin, Coordinate destination)
     {
         if (origin.Equals(destination))
         {

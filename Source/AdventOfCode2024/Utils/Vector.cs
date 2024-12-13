@@ -9,27 +9,27 @@ using System;
 /// <param name="y">The Y component.</param>
 /// <param name="z">The Z component.</param>
 /// <param name="w">The W component.</param>
-public class Vector(int x, int y, int z = 0, int w = 0)
+public class Vector(long x, long y, long z = 0, long w = 0)
 {
     /// <summary>
     /// Gets the X component of this <see cref="Vector"/>.
     /// </summary>
-    public int X { get; } = x;
+    public long X { get; } = x;
 
     /// <summary>
     /// Gets the Y component of this <see cref="Vector"/>.
     /// </summary>
-    public int Y { get; } = y;
+    public long Y { get; } = y;
 
     /// <summary>
     /// Gets the Z component of this <see cref="Vector"/>.
     /// </summary>
-    public int Z { get; } = z;
+    public long Z { get; } = z;
 
     /// <summary>
     /// Gets the W component of this <see cref="Vector"/>.
     /// </summary>
-    public int W { get; } = w;
+    public long W { get; } = w;
 
     /// <summary>
     /// Returns the magnitude of this Vector.

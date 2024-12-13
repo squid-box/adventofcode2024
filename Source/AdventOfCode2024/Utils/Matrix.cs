@@ -30,7 +30,7 @@ public class Matrix<T>
     /// </summary>
     /// <param name="width">Width of the matrix.</param>
     /// <param name="height">Height of the matrix.</param>
-    public Matrix(int width, int height)
+    public Matrix(long width, long height)
     {
         Width = width;
         Height = height;
@@ -43,7 +43,7 @@ public class Matrix<T>
     /// Creates a new square <see cref="Matrix{T}"/> with the given size.
     /// </summary>
     /// <param name="size">Width and height of the matrix.</param>
-    public Matrix(int size)
+    public Matrix(long size)
     {
         Width = size;
         Height = size;
@@ -55,12 +55,12 @@ public class Matrix<T>
     /// <summary>
     /// Width of the <see cref="Matrix{T}"/>.
     /// </summary>
-    public int Width { get; private set; }
+    public long Width { get; private set; }
 
     /// <summary>
     /// Height of the <see cref="Matrix{T}"/>.
     /// </summary>
-    public int Height { get; private set; }
+    public long Height { get; private set; }
 
     public T this[Coordinate key]
     {
@@ -204,9 +204,21 @@ public class Matrix<T>
     /// Gets the element stored at (<paramref name="x"/>,<paramref name="y"/>).
     /// </summary>
     /// <exception cref="IndexOutOfRangeException">Thrown if any index is out of range.</exception>
-    public T GetElement(int x, int y)
+    public T GetElement(long x, long y)
     {
         return GetElement(new Coordinate(x, y));
+    }
+
+    public IList<(Coordinate Position, T Element)> GetElements()
+    {
+        var result = new List<(Coordinate,T)>();
+
+        foreach (var (p, e) in _matrix)
+        {
+            result.Add((p, e));
+        }
+
+        return result;
     }
 
     public int Count(Func<T, bool> filter = null)
@@ -239,7 +251,7 @@ public class Matrix<T>
     /// Sets the given element at (<paramref name="x"/>,<paramref name="y"/>).
     /// </summary>
     /// <exception cref="IndexOutOfRangeException">Thrown if any index is out of range.</exception>
-    public void SetElement(int x, int y, T value)
+    public void SetElement(long x, long y, T value)
     {
         SetElement(new Coordinate(x, y), value);
     }
@@ -250,7 +262,7 @@ public class Matrix<T>
     /// <param name="y">Zero-indexed row number.</param>
     /// <returns>All elements from given row.</returns>
     /// <exception cref="IndexOutOfRangeException">Thrown if any index is out of range.</exception>
-    public IList<T> GetRow(int y)
+    public IList<T> GetRow(long y)
     {
         EvaluateGivenIndices(0, y);
 
@@ -264,7 +276,7 @@ public class Matrix<T>
         return result;
     }
 
-    public void SetRow(int y, IList<T> values)
+    public void SetRow(long y, IList<T> values)
     {
         EvaluateGivenIndices(0, y);
         
@@ -285,7 +297,7 @@ public class Matrix<T>
     /// <param name="x">Zero-indexed column number.</param>
     /// <returns>All elements from given column.</returns>
     /// <exception cref="IndexOutOfRangeException">Thrown if any index is out of range.</exception>
-    public IList<T> GetColumn(int x)
+    public IList<T> GetColumn(long x)
     {
         EvaluateGivenIndices(x, 0);
 
@@ -299,7 +311,7 @@ public class Matrix<T>
         return result;
     }
 
-    public void SetColumn(int x, IList<T> values)
+    public void SetColumn(long x, IList<T> values)
     {
         EvaluateGivenIndices(x, 0);
 
@@ -320,7 +332,7 @@ public class Matrix<T>
     /// <param name="x">X coordinate.</param>
     /// <param name="y">Y coordinate.</param>
     /// <returns>True if within bounds, otherwise false.</returns>
-    public bool IsWithinBounds(int x, int y)
+    public bool IsWithinBounds(long x, long y)
     {
         return x.IsWithin(0, Width) &&
                y.IsWithin(0, Height);
@@ -337,7 +349,7 @@ public class Matrix<T>
                coordinate.Y.IsWithin(0, Height);
     }
 
-    private void EvaluateGivenIndices(int x, int y)
+    private void EvaluateGivenIndices(long x, long y)
     {
         if (!x.IsWithin(0, Width))
         {
@@ -362,7 +374,9 @@ public class Matrix<T>
                 sb.Append(",");
             }
 
-            sb.AppendLine();
+            sb.Remove(sb.Length - 1, 1);
+
+            sb.AppendLine(";");
         }
 
         return sb.ToString();
