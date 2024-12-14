@@ -2,6 +2,8 @@ namespace AdventOfCode2024.Problems;
 
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using AdventOfCode2024.Utils;
@@ -58,11 +60,26 @@ public class Problem14(InputDownloader inputDownloader) : ProblemBase(14, inputD
             robots.Add(new Robot(line));
         }
 
-        for (var n = 0; n < 1000; n++)
+        var centerTopLeft = new Coordinate(width / 3, height / 3);
+        var centerBottomRight = new Coordinate(width - (width / 4), height - height / 2);
+
+        for (var n = 1; n < 10000; n++)
         {
             foreach (var robot in robots)
             {
                 robot.Move(width, height);
+            }
+
+            var centerCount = robots.Count(r => r.Position.X > centerTopLeft.X && r.Position.Y > centerTopLeft.Y &&
+                                                r.Position.X < centerBottomRight.X &&
+                                                r.Position.Y < centerBottomRight.Y);
+
+            var outerCount = robots.Count(r => (r.Position.X < centerTopLeft.X || r.Position.X > centerBottomRight.X) &&
+                                               (r.Position.Y < centerTopLeft.Y || r.Position.Y > centerBottomRight.Y));
+
+            if (centerCount < outerCount)
+            {
+                continue;
             }
 
             var map = new Matrix<char>(width, height);
@@ -82,12 +99,11 @@ public class Problem14(InputDownloader inputDownloader) : ProblemBase(14, inputD
                 }
             }
 
-            Console.WriteLine($"Iteration {n}");
+            Console.WriteLine($"Iteration {n}\n");
             Console.WriteLine(map);
-            Console.ReadLine();
         }
 
-        return "huh?";
+        return "Check through printed images...";
     }
 
     private class Robot
