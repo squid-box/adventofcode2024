@@ -371,12 +371,12 @@ public class Matrix<T>
             for (var x = 0; x < Width; x++)
             {
                 sb.Append(GetElement(x, y));
-                sb.Append(",");
+                //sb.Append(",");
             }
 
             sb.Remove(sb.Length - 1, 1);
 
-            sb.AppendLine(";");
+            sb.AppendLine();
         }
 
         return sb.ToString();
